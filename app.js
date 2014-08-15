@@ -6,6 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
+  , consent = require('./routes/consent')
   , classroom = require('./routes/classroom')
   , survey = require('./routes/survey')
   , mail = require('./routes/mail')
@@ -381,7 +382,7 @@ passport.use(new LocalStrategy(function(username, password, done) {
 
 var app = express();
 
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/sumsurv');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/ss15');
 
 app.configure(function(){
   app.listen(80, function() {
@@ -425,6 +426,7 @@ app.get('/survey/create', ensureAuthenticated, user.create);
 app.get('/export', ensureAuthenticated, user.exportcsv);
 app.get('/mail', user.mail);
 app.get('/classes', ensureAuthenticated, user.my_classes);
+app.get('/consent', ensureAuthenticated, consent.view);
 app.get('/part', ensureAuthenticated, user.part);
 app.get('/:user/:class/take', ensureAuthenticated, ensureDate, ensureDemo, user.take);
 app.get('/error/not_in_roster', ensureAuthenticated, user.err);
@@ -468,6 +470,14 @@ app.get('/class/roster', classroom.roster);
 app.get('/class/survey', classroom.survey);
 app.get('/class/requests', classroom.view_requests);
 app.get('/class/span/view', classroom.view_span);
+
+
+// Consent forms stuff
+app.get('/consent/cites', consent.cites);
+app.get('/consent/edit', consent.edit);
+app.post('/consent/add', consent.add);
+
+
 
 //import text file
 app.get('/import', ensureAuthenticated, user.import);

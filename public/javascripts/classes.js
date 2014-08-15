@@ -305,6 +305,7 @@ $(document).ready(function() {
 			$(this).html('<i class="icon icon-edit"></i> Editing');
 			$(this).toggleClass('editing');
 			$(this).parent().prev().toggleClass('editing');
+			console.log($(this).attr('name'));
 			setClassDiv($(this).attr('name'));
 		});
 	}
@@ -452,19 +453,24 @@ $(document).ready(function() {
 					else {
 						if (res.success) {
 							// Do success stuff here (render partials, initialize new elements' jquery)
+							// Updates list of classes on left (I think.. :)
 							$.get('/class/all', function(data) {
 								if(data.err) { console.log("Unable to load all classes.") }
 								else {
 									$(".class-container").fadeOut("fast", function() {
 										$(this).html(data).fadeIn("fast", function() {
+											// does this really just modify the last one?
 											$('tr:last td a.edit-link').append(" Editing").toggleClass("editing");
 											$('tr:last td:first').toggleClass("editing");
+											// guess need to call this since new data was loaded? Makes buttons work
 											activateEdit();
 										})
 									})
 								}
 							});
+							// Updates stuff on right by calling setClassDiv method - above could be similarly separated out 
 							setClassDiv(className);
+							// Close popover?
 							$('.btn-new').popover("toggle");
 						}
 						else {

@@ -604,3 +604,17 @@ input[type='range'] {
 	margin: 3px;
 	overflow: hidden;
 }
+
+#numyes{
+	color: green;
+}
+#numno{
+	color: red;
+}
+#numwait{
+	color: grey;
+}
+.statbutton{
+	border:1px solid black;
+	border-radius: 9px;
+}

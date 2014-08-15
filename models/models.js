@@ -50,7 +50,8 @@ var classroomSchema = mongoose.Schema({
 	span: { type: Object },
 	requests: { type: Array },
 	checker: { type: Array },
-	maildeck: { type: Object }
+	maildeck: { type: Object },
+	consents: [{ email: String, status: String}]
 }),
 	Classroom = mongoose.model('Classroom', classroomSchema);
 exports.classroom = Classroom;
