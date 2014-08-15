@@ -1,0 +1,18 @@
+//- _classList.jade
+//- partial for displaying user's classes
+
+if (!classes || classes.length === 0)
+	p You do not have any classes!
+else
+	table.table.table-striped.table-condensed.fixed
+		tr
+			th Name
+			th(style="text-align: center") Length
+			th(style="text-align: right") View
+		for room in classes
+			tr
+				td #{room.name}
+				td(style="text-align: center") #{room.name.length}
+				td(style="text-align: right")
+					a.edit-consent(name=room.name)
+						icon.icon-edit

@@ -1,0 +1,40 @@
+//- _classList.jade
+//- partial for displaying user's classes
+
+div#title-class.row-fluid
+
+	h2.text-center #{name}
+	div.row-fluid
+		div.span4.outline
+			h4.text-right im in a box
+			div.statbutton#numyes
+				h6 yes!
+			div.statbutton#numno
+				h6 no : (
+			div.statbutton#numwait
+				h6 waiting ?
+		div.span8.outline
+			h4 NAMES N STUFF OVER HERE!
+			div.btn-group
+				btn.btn.consent-add.popper(data-toggle='popover', title data-content='<div class="roster-add"><form class="form-inline roster-input"><textarea class="popover-textarea" type="textarea" placeholder="i.e. tim.bibberson@blargh.com, jim.jefferson@woohoo.com"></textarea><br><btn class="btn btn-text-consent">Enter</btn><input style="bold" type="file" name="files[]" multiple="multiple" id="files"></input></form></div>', data-original-title='Add Participants')
+					i.icon-plus
+					|  Add Participants
+			div
+				if !(cite)
+					| you ain't got no dater!
+				else
+					table.table.table-striped
+						tr
+							th Name
+							th Status
+						if cite
+							for entry in cite[0].consents
+								tr
+									td #{entry.email}
+									td #{entry.status}
+						tr
+							td Suzie
+							td found
+						tr
+							td Jake
+							td don't ask

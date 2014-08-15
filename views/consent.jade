@@ -1,0 +1,22 @@
+//- consent.jade
+//- display my current classes/allow for roster updating/data exporting
+
+extends layout
+
+block scripts
+	script(type='text/javascript', src='/javascripts/classes.js')
+	script(type='text/javascript', src='/javascripts/consent.js')
+
+block content
+	div.row-fluid
+		div.span3.outline.container-special
+			| Consent Forms
+			div.button-group
+				btn.btn.btn-new.popper(data-toggle='popover', title data-content='<div class="name-div"><form class="form-inline name-input"><input class="class-name" type="text" placeholder="Enter a name for your class"></input><btn class="btn btn-enter">Enter</btn></form></div>', data-original-title='Class Name')
+					icon.icon-plus
+						|  New Class
+			div#classList
+				include _classList.jade
+
+		div.span9.outline.viewgroup
+			include _consentEdit.jade
